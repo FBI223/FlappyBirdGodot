@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpxemkni0wfxf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0odc"]
+size = Vector2(65, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wm1f"]
+
+[node name="Plane" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -1)
+shape = SubResource("RectangleShape2D_t0odc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8wm1f")
