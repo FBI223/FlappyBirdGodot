@@ -1,0 +1,140 @@
+[gd_scene load_steps=11 format=3 uid="uid://drh5ywnsg61lk"]
+
+[ext_resource type="Script" path="res://scenes/main/Main.cs" id="1_c01wk"]
+[ext_resource type="Texture2D" uid="uid://bqxp6tfi6i3hw" path="res://assets/background/sky.png" id="1_eqgoc"]
+[ext_resource type="FontFile" uid="uid://bjigqk0ug7ps0" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_k4gt2"]
+[ext_resource type="LabelSettings" uid="uid://ckuqcj33xo3cg" path="res://resources/font_source.tres" id="3_wup8g"]
+[ext_resource type="AudioStream" uid="uid://drenkhbcntmbl" path="res://assets/audio/bgm_menu.mp3" id="4_0kaht"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q7whv"]
+font = ExtResource("2_k4gt2")
+font_size = 72
+font_color = Color(0.329412, 0.105882, 1, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 9
+
+[sub_resource type="LabelSettings" id="LabelSettings_gwd04"]
+font = ExtResource("2_k4gt2")
+font_size = 32
+font_color = Color(0.951604, 0.850552, 0.746175, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 9
+
+[sub_resource type="Animation" id="Animation_xnrju"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label2:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_apf1u"]
+resource_name = "self_modulate"
+length = 1.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label2:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.113725), Color(1, 1, 1, 0.552941), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y4pqi"]
+_data = {
+"RESET": SubResource("Animation_xnrju"),
+"self_modulate": SubResource("Animation_apf1u")
+}
+
+[node name="Main" type="Control" node_paths=PackedStringArray("_highScoreLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c01wk")
+_highScoreLabel = NodePath("MarginContainer/HighScoreLable")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_eqgoc")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Flappy
+Jet"
+label_settings = SubResource("LabelSettings_q7whv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Press Space
+To
+Play"
+label_settings = SubResource("LabelSettings_gwd04")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScoreLable" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "000"
+label_settings = ExtResource("3_wup8g")
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "High Score"
+label_settings = ExtResource("3_wup8g")
+vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0kaht")
+volume_db = -16.0
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y4pqi")
+}
+autoplay = "self_modulate"

@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0q4255oaoef7"]
+
+[ext_resource type="Script" path="res://scenes/game/Game.cs" id="1_2n0rn"]
+[ext_resource type="Texture2D" uid="uid://cnpojg65yd2ov" path="res://assets/background/rocks_2.png" id="1_n0heq"]
+[ext_resource type="PackedScene" uid="uid://b0bu8g11skfke" path="res://scenes/plane/Plane.tscn" id="2_oymtr"]
+[ext_resource type="PackedScene" uid="uid://drsmayealutl2" path="res://scenes/ParalaxBackground/paralax_background.tscn" id="3_l6lqw"]
+[ext_resource type="PackedScene" uid="uid://cc6mbrt4lt5js" path="res://scenes/barrier/Barrier.tscn" id="3_rfr2k"]
+[ext_resource type="PackedScene" uid="uid://w7ji81r83klc" path="res://scenes/gameover/GameOver.tscn" id="4_2xk0o"]
+[ext_resource type="PackedScene" uid="uid://cwd01xvq5lxeq" path="res://scenes/pipes/Pipes.tscn" id="4_bnyt2"]
+[ext_resource type="PackedScene" uid="uid://0o3vsfknkpf1" path="res://scenes/hud/Hud.tscn" id="6_o1kkp"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_spawnUpper", "_spawnLower", "_spawnTimer")]
+script = ExtResource("1_2n0rn")
+_spawnUpper = NodePath("SpawnUpper")
+_spawnLower = NodePath("SpawnLower")
+_spawnTimer = NodePath("SpawnTimer")
+_pipesScene = ExtResource("4_bnyt2")
+
+[node name="ParalaxBackground" parent="." instance=ExtResource("3_l6lqw")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("6_o1kkp")]
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("4_2xk0o")]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(403, 470)
+scale = Vector2(0.745573, 0.997222)
+texture = ExtResource("1_n0heq")
+
+[node name="Plane" parent="." instance=ExtResource("2_oymtr")]
+position = Vector2(49, 516)
+
+[node name="Barrier" parent="." instance=ExtResource("3_rfr2k")]
+position = Vector2(1, -10)
+
+[node name="Barrier2" parent="." instance=ExtResource("3_rfr2k")]
+position = Vector2(-3, 964)
+
+[node name="SpawnUpper" type="Marker2D" parent="."]
+position = Vector2(550, 400)
+
+[node name="SpawnLower" type="Marker2D" parent="."]
+position = Vector2(550, 650)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.4
+autostart = true
